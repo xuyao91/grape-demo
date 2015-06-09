@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609082555) do
+ActiveRecord::Schema.define(version: 20150609101856) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "sku",        limit: 255
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(version: 20150609082555) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "scores", force: :cascade do |t|
+    t.integer  "student_id", limit: 4
+    t.integer  "course_id",  limit: 4
+    t.integer  "grade",      limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "scores", ["course_id"], name: "index_scores_on_course_id", using: :btree
+  add_index "scores", ["student_id"], name: "index_scores_on_student_id", using: :btree
 
   create_table "students", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -39,4 +50,6 @@ ActiveRecord::Schema.define(version: 20150609082555) do
     t.datetime "updated_at",             null: false
   end
 
+  add_foreign_key "scores", "courses"
+  add_foreign_key "scores", "students"
 end
