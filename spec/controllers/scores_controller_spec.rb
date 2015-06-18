@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe ScoresController, type: :controller do
 
+	let(:score_params) {{student_id: 1, coures_id: 2, grade:2}}
+
 	describe 'GET#index' do
 		it "assigns all scores as @scores" do
 			score = FactoryGirl.create(:score)
@@ -38,6 +40,14 @@ RSpec.describe ScoresController, type: :controller do
 			get :edit, id: score.id
 			expect(assigns(:score)).to eq(score)
 			expect(response).to be_success
+		end	
+	end	
+
+	context "POST#create" do
+		it "create the score" do
+			 expect {
+          post :create, {score: score_params}
+        }.to change(Score, :count).by(1)
 		end	
 	end	
 end

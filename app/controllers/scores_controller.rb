@@ -11,9 +11,18 @@ class ScoresController < ApplicationController
 
 	def edit; end
 
+	def create
+		@score = Score.create(score_params)
+		redirect_to @score
+	end	
+
 	private 
 
 	def set_score
 		@score = Score.find_by(id: params[:id])
+	end
+
+	def score_params
+		params.require(:score).permit(:student_id, :course_id,:grade)
 	end	
 end
