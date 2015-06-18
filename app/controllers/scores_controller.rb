@@ -12,8 +12,12 @@ class ScoresController < ApplicationController
 	def edit; end
 
 	def create
-		@score = Score.create(score_params)
-		redirect_to @score
+		@score = Score.new(score_params)
+		if @score.save
+			redirect_to @score
+		else
+			render action: :new
+		end		
 	end	
 
 	private 
