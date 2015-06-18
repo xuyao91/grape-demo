@@ -28,7 +28,16 @@ RSpec.describe ScoresController, type: :controller do
 
 		it "render template form" do
 			get :new
-			expect(view).to render_template(:partial => "_form")
+			expect(response).to render_template("new")
+		end	
+	end
+
+	describe "GET#edit" do
+		it "should requested edit as @score" do
+			score = FactoryGirl.create(:score)
+			get :edit, id: score.id
+			expect(assigns(:score)).to eq(score)
+			expect(response).to be_success
 		end	
 	end	
 end

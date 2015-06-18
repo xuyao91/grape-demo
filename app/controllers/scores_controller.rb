@@ -1,5 +1,5 @@
 class ScoresController < ApplicationController
-	before_action :set_score, only: [:show]
+	before_action :set_score, only: [:show, :edit]
 
 	def index
 		@scores = Score.all
@@ -8,6 +8,8 @@ class ScoresController < ApplicationController
 	def new
 		@score = Score.new
 	end	
+
+	def edit; end
 
 	private 
 
