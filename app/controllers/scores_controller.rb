@@ -1,5 +1,5 @@
 class ScoresController < ApplicationController
-	before_action :set_score, only: [:show, :edit]
+	before_action :set_score, only: [:show, :edit, :destroy]
 
 	def index
 		@scores = Score.all
@@ -18,6 +18,11 @@ class ScoresController < ApplicationController
 		else
 			render action: :new
 		end		
+	end	
+
+	def destroy
+		@score.destroy
+		redirect_to scores_path
 	end	
 
 	private 

@@ -77,4 +77,19 @@ RSpec.describe ScoresController, type: :controller do
 	  	end	
 	  end
 	end	
+
+	describe "DELETE#destroy" do
+		it "find the score" do
+			score = FactoryGirl.create(:score)
+			# expect(assigns(:score)).to eq(score)
+		end		
+
+		it "delete the score" do
+			score = FactoryGirl.create(:score)
+			expect{
+				delete :destroy, {id: score.id}
+			}.to change(Score, :count).by(-1)
+		end	
+	end	
+
 end
